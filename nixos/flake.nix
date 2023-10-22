@@ -2,7 +2,7 @@
   description = "Ben's NixOS flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
     nur.url = "github:nix-community/NUR";
     hyprland-contrib = {
       url = "github:hyprwm/contrib";
