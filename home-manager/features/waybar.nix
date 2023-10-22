@@ -8,9 +8,9 @@
             layer = "top";
             height = 30;
             spacing = 4;
-            modules-left = ["hyprland/workspaces" "hyprland/submap"];
-            modules-center = ["hyprland/window"];
-            modules-right = ["idle_inhibitor" "pulseaudio" "network" "backlight" "keyboard-state" "hyprland/language" "battery" "battery#bat2" "clock#date" "clock" "tray" "custom/power" "custom/notification"];
+            modules-left = ["hyprland/workspaces" "hyprland/submap" "hyprland/window"];
+            modules-center = [];
+            modules-right = ["idle_inhibitor" "pulseaudio" "backlight" "keyboard-state" "hyprland/language" "battery" "battery#bat2" "clock#date" "clock" "tray" "custom/power" "custom/notification"];
             keyboard-state = {
                 numlock = true;
                 capslock = true;
@@ -89,7 +89,7 @@
             };
             "network" = {
                 # "interface" = "wlp2*"; # (Optional) To force the use of this interface
-                format-wifi = "{essid} ({signalStrength}%) ";
+                format-wifi = "{essid} ";
                 format-ethernet = "󰈀";
                 tooltip-format = "{ifname} via {gwaddr} ";
                 format-linked = "{ifname} (No IP) ";
