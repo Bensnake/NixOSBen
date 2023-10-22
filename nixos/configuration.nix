@@ -43,30 +43,44 @@
 
   programs.hyprland = {
   	enable = true;
-	enableNvidiaPatches = true;
+	# nvidiaPatches = true;
 	xwayland.enable = true;
   };
   xdg.portal.enable = true;
   security.pam.services.swaylock = {};
 
   # nvidia fixes
-  environment.sessionVariables = {
+  #environment.sessionVariables = {
 	# fixes invisible cursor
-  	WLR_NO_HARDWARE_CURSORS = "1";
+  	#WLR_NO_HARDWARE_CURSORS = "1";
 
 	# hint electron apps to run with wayland
-	NIXOS_OZONE_WL = "1";
-  };
+  	#NIXOS_OZONE_WL = "1";
+  #};
 
   hardware.opengl = {
   	enable = true;
-	driSupport = true;
-	driSupport32Bit = true;
+  	driSupport = true;
+  	driSupport32Bit = true;
   };
 
   hardware.nvidia = {
     modesetting.enable = true;
     nvidiaSettings = true;
+
+    # laptop
+    powerManagement.enable = true;
+    powerManagement.finegrained = true;
+    open = true;
+    prime = {
+      intelBusId = "PCI:0:2:0";
+      nvidiaBusId = "PCI:1:0:0";
+      offload = {
+        enable = true;
+        enableOffloadCmd = true;
+      };
+    };
+
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
   services.xserver.videoDrivers = ["nvidia"];
@@ -119,6 +133,10 @@
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
+    home-manager
+    brightnessctl
+    playerctl
+    anytype
     # Neovim
     neovim 
     wl-clipboard
@@ -164,8 +182,6 @@
     inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
     hyprpicker
 
-    home-manager
-
     # gaming
     wineWowPackages.stable
     winetricks
@@ -175,7 +191,7 @@
   ];
 
 
-  fonts.packages = with pkgs; [
+  fonts.fonts = with pkgs; [
     nerdfonts
     noto-fonts
   ];
@@ -194,6 +210,6 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  system.stateVersion = "unstable";
+  system.stateVersion = "23.05";
 
 }
