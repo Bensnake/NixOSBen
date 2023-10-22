@@ -3,23 +3,23 @@
 {
   wayland.windowManager.hyprland = {
   enable = true;
-  enableNvidiaPatches = true;
+  enableNvidiaPatches = false;
   xwayland.enable = true;
   settings = {
-      monitor = ",preferred,auto,auto,bitdepth,10";
+      monitor = ",preferred,auto,1"; #bitdepth,10";
 
       env = [
           "XCURSOR_SIZE,24"
           # nvidia environment variables
-          "LIBVA_DRIVER_NAME,nvidia"
-          "XDG_SESSION_TYPE,wayland"
-          "GBM_BACKEND,nvidia-drm"
-          "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-          "WLR_NO_HARDWARE_CURSORS,1"
+          #"LIBVA_DRIVER_NAME,nvidia"
+          #"XDG_SESSION_TYPE,wayland"
+          #"GBM_BACKEND,nvidia-drm"
+          #"__GLX_VENDOR_LIBRARY_NAME,nvidia"
+          #"WLR_NO_HARDWARE_CURSORS,1"
       ];
 
       exec-once = [
-      "waybar & nm-applet --indicator & hyprpaper & blueman-applet & swaync & udiskie -f thunar --tray"
+      "waybar & nm-applet --indicator & hyprpaper & blueman-applet & swaync & udiskie -f thunar --tray & mpris-proxy"
       "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
       # set  cursor theme
       "hyprctl setcursor Bibata-Original-Ice 24"
@@ -97,7 +97,8 @@
       };
 
       gestures = {
-          workspace_swipe = false;
+          workspace_swipe = true;
+          workspace_swipe_forever = true;
       };
 
       # Example per-device config
@@ -172,6 +173,10 @@
           ",XF86AudioPause, exec, playerctl play-pause"
           ",XF86AudioNext, exec, playerctl next"
           ",XF86AudioPrev, exec, playerctl previous"
+
+          # brightness binds
+          ",XF86MonBrightnessUp, exec, brightnessctl set 5%-"
+          ",XF86MonBrightnessDown, exec, brightnessctl set +5%"
       ];
 
       binde = [
