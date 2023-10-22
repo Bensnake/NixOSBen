@@ -30,7 +30,7 @@
         text-wrong-color = config.colorScheme.colors.base05;
 
         text-caps-lock-color = config.colorScheme.colors.base05;
-        image = "~/Pictures/omer-tunc-sds-copy.jpg";
+        image = "~/Pictures/omer-tunc-sds.jpg";
         effect-blur = "7x5";
         grace = 2;
     };
