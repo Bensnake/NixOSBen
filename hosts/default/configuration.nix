@@ -5,7 +5,7 @@
     [
       ./hardware-configuration.nix
       ../../modules/nixos/lanzaboote.nix
-      ../../modules/nixos/firefox.nix
+      #../../modules/nixos/firefox.nix
       ../../modules/nixos/nvidia.nix
       ../../modules/nixos/laptop-nvidia.nix
       ../../modules/nixos/uniwifi.nix
@@ -13,15 +13,6 @@
       #../../modules/nixos/hyprland.nix
     ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  nixpkgs.config.permittedInsecurePackages = [
-  	"dotnet-runtime-wrapped-6.0.36"
-	"dotnet-runtime-6.0.36"
-	"aspnetcore-runtime-6.0.36"
-	"aspnetcore-runtime-wrapped-6.0.36"
-	"dotnet-sdk-6.0.428"
-	"dotnet-sdk-wrapped-6.0.428"
-  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -53,8 +44,6 @@
   services.desktopManager.cosmic.enable = true;
   services.displayManager.cosmic-greeter.enable = true;
   programs.xwayland.enable = true;
-  services.xserver.enable = true;
-  services.desktopManager.plasma6.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb.layout = "us, ara";
@@ -106,7 +95,7 @@
 
   programs.steam.enable = true;
 
-  home-manager.backupFileExtension = "backup";
+  home-manager.backupFileExtension = "bak2";
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
     users = {
@@ -117,7 +106,8 @@
   users.users.ben = {
     isNormalUser = true;
     description = "ben";
-    extraGroups = [ "networkmanager" "wheel" ];
+    #dialout group is for arduino
+    extraGroups = [ "networkmanager" "wheel" "dialout" ];
     packages = with pkgs; [];
     createHome = true;
   };
@@ -134,10 +124,25 @@
 
   virtualisation.waydroid.enable = true;
 
+  virtualisation.virtualbox.host.enable = true;
+  users.extraGroups.vboxusers.members = [ "ben" ];
+
+  nixpkgs.overlays = [
+    (final: _prev: {
+      unstable = import inputs.nixpkgs-unstable {
+        system = final.system;
+        config.allowUnfree = true;
+      };
+    })
+  ];
+
   environment.systemPackages = with pkgs; [
      scenebuilder
      libGL
      android-studio
+
+     unstable.ciscoPacketTracer8
+     unstable.arduino-ide
 
      gimp
      nodejs
@@ -153,9 +158,13 @@
      qbittorrent
      mpv
      neofetch
+     pfetch
      libreoffice
      thunderbird
+	 librewolf
      ungoogled-chromium
+     google-chrome
+	 miraclecast
 
      anytype
 
@@ -173,8 +182,10 @@
   ];
 
   fonts.packages = with pkgs; [
-    nerdfonts
+  	nerdfonts
     noto-fonts
+    roboto
+	roboto-mono
   ];
   system.stateVersion = "24.05";
 

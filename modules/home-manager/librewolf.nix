@@ -1,9 +1,8 @@
 { config, pkgs, ... }:
 
 {
-  programs.firefox = {
+  programs.librewolf = {
       enable = true;
-      package = pkgs.librewolf;
       #
       /* ---- POLICIES ---- */
       # Check about:policies#documentation for options.

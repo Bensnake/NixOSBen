@@ -3,8 +3,9 @@
 
   inputs = {
     #nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
-    #nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs.follows = "nixos-cosmic/nixpkgs-stable";
+    #nixpkgs.follows = "nixos-cosmic/nixpkgs";
 
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v0.4.1";
@@ -23,14 +24,20 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+	nvf = {
+		url = "github:notashelf/nvf";
+		inputs.nixpkgs.follows = "nixpkgs";
+	};
+
     nixos-cosmic = {
     	url = "github:lilyinstarlight/nixos-cosmic";
-	inputs.nixpkgs.follows = "nixpkgs";
+	#inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-colors = {
-    	url = "github:misterio77/nix-colors";
-    };
+	textfox = {
+		url = "github:adriankarlen/textfox";
+		inputs.nixpkgs.follows = "nixpkgs";
+	};
 
     #stylix = {
     #  url = "github:danth/stylix/release-24.11";
@@ -38,7 +45,7 @@
     #};
   };
 
-  outputs = { self, nixpkgs, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, ... }@inputs:
   let
     system = "x86_64-linux";
 
@@ -72,10 +79,9 @@
       }
       inputs.nixos-cosmic.nixosModules.default
       ./hosts/default/configuration.nix
-      inputs.home-manager.nixosModules.default
+      home-manager.nixosModules.home-manager
       #inputs.stylix.nixosModules.stylix
       inputs.lanzaboote.nixosModules.lanzaboote
-      inputs.nix-colors.homeManagerModules.default
       ];
     };
   };

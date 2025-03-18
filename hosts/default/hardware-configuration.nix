@@ -12,6 +12,13 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
+  boot.supportedFilesystems = [ "ntfs" ];
+
+  fileSystems."/windows" =
+    { device = "/dev/disk/by-uuid/28D4CC6CD4CC3DB6";
+      fsType = "ntfs-3g"; 
+      options = [ "rw" "uid=1000"];
+    };
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/93ac9902-04b2-46b2-9ae2-5abffcf55dd3";
