@@ -2,9 +2,9 @@
 
 {
   imports = [
-  	./waybar.nix
-	./rofi.nix
-	./hyprpaper.nix
+	#  	./waybar.nix
+	# ./rofi.nix
+	# ./hyprpaper.nix
   ];
 
   wayland.windowManager.hyprland = {
@@ -47,7 +47,7 @@
           gaps_in = 3;
           gaps_out = 3;
           border_size = 3;
-          "col.active_border" = "rgba(${config.colorScheme.palette.base08}ee) rgba(${config.colorScheme.palette.base09}ee) 45deg";
+          # "col.active_border" = "rgba(${config.colorScheme.palette.base08}ee) rgba(${config.colorScheme.palette.base09}ee) 45deg";
           "col.inactive_border" = "rgba(595959aa)";
 
           layout = "dwindle";

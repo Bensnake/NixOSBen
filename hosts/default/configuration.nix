@@ -9,8 +9,8 @@
       ../../modules/nixos/nvidia.nix
       ../../modules/nixos/laptop-nvidia.nix
       ../../modules/nixos/uniwifi.nix
-      ../../modules/nixos/kvm.nix
-      #../../modules/nixos/hyprland.nix
+      #../../modules/nixos/kvm.nix
+      ../../modules/nixos/hyprland.nix
     ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -106,8 +106,7 @@
   users.users.ben = {
     isNormalUser = true;
     description = "ben";
-    #dialout group is for arduino
-    extraGroups = [ "networkmanager" "wheel" "dialout" ];
+    extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [];
     createHome = true;
   };
@@ -124,25 +123,10 @@
 
   virtualisation.waydroid.enable = true;
 
-  virtualisation.virtualbox.host.enable = true;
-  users.extraGroups.vboxusers.members = [ "ben" ];
-
-  nixpkgs.overlays = [
-    (final: _prev: {
-      unstable = import inputs.nixpkgs-unstable {
-        system = final.system;
-        config.allowUnfree = true;
-      };
-    })
-  ];
-
   environment.systemPackages = with pkgs; [
      scenebuilder
      libGL
      android-studio
-
-     unstable.ciscoPacketTracer8
-     unstable.arduino-ide
 
      gimp
      nodejs
@@ -151,7 +135,7 @@
      wl-clipboard
      vscode.fhs
      gcc
-     (python3.withPackages(ps: with ps; [ pip ]))
+     (python3.withPackages(ps: with ps; [ pip numpy pydub ]))
      pipenv
      yt-dlp
      vesktop
@@ -165,12 +149,15 @@
      ungoogled-chromium
      google-chrome
 	 miraclecast
+        gnome-network-displays
 
      anytype
 
      yt-dlp
-     kdenlive
+     kdePackages.kdenlive
      obs-studio
+     ffmpeg
+     libgcc
 
      wineWowPackages.stable
      winetricks
@@ -182,8 +169,6 @@
   ];
 
   fonts.packages = with pkgs; [
-  	nerdfonts
-    noto-fonts
     roboto
 	roboto-mono
   ];
