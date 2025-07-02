@@ -9,11 +9,11 @@
 			splash_offset = 2.0;
 
 			preload =
-				[ "/home/ben/Pictures/WayOfKings.jpg" ];
+				[ "/home/ben/Pictures/stephen-li-honor1080.jpg" ];
 
 			wallpaper = [
-				"eDP-1,/home/ben/Pictures/WayofKings.jpg"
-				"HDMI-A-1,/home/ben/Pictures/WayOfKings.jpg"
+				"eDP-1,/home/ben/Pictures/stephen-li-honor1080.jpg"
+				"HDMI-A-1,/home/ben/Pictures/stephen-li-honor1080.jpg"
 			];
 		};
 	};

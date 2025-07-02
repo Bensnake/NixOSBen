@@ -6,7 +6,7 @@
     ../../modules/home-manager/nvf.nix
     ../../modules/home-manager/mpv.nix
     ../../modules/home-manager/librewolf.nix
-    ../../modules/home-manager/hyprland.nix
+        #../../modules/home-manager/hyprland.nix
   ];
 
   home.username = "ben";

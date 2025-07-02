@@ -1,9 +1,11 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   environment.systemPackages = with pkgs; [
   	brightnessctl
 	hyprpaper
+    swaynotificationcenter
+    hyprpolkitagent
   ];
 
   programs.hyprland = {

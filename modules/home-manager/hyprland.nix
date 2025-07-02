@@ -1,10 +1,11 @@
-{pkgs, config, ...}:
+{pkgs, config, inputs, ...}:
 
 {
   imports = [
-	#  	./waybar.nix
-	# ./rofi.nix
-	# ./hyprpaper.nix
+    ./waybar.nix
+	./rofi.nix
+	./hyprpaper.nix
+    ./hyprpanel.nix
   ];
 
   wayland.windowManager.hyprland = {
@@ -18,27 +19,20 @@
 
       env = [
           "XCURSOR_SIZE,24"
-          # nvidia environment variables
-          #"LIBVA_DRIVER_NAME,nvidia"
-          #"XDG_SESSION_TYPE,wayland"
-          #"GBM_BACKEND,nvidia-drm"
-          #"__GLX_VENDOR_LIBRARY_NAME,nvidia"
-          #"WLR_NO_HARDWARE_CURSORS,1"
-          #"WLR_DRM_NO_ATOMIC,1"
       ];
 
-      exec-once = "waybar";
+      exec-once = [
+      ];
 
-      # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
       input = {
           kb_layout = "us, ara";
           #kb_options = "grp:super_cyrillic_ef_toggle";
 
           follow_mouse = 1;
 
-	  touchpad = {
-		  natural_scroll = true;
-	  };
+          touchpad = {
+              natural_scroll = true;
+          };
 
           accel_profile = "flat";
       };
@@ -47,11 +41,18 @@
           gaps_in = 3;
           gaps_out = 3;
           border_size = 3;
+          no_border_on_floating = false;
+          gaps_workspaces = 0;
+        
           # "col.active_border" = "rgba(${config.colorScheme.palette.base08}ee) rgba(${config.colorScheme.palette.base09}ee) 45deg";
           "col.inactive_border" = "rgba(595959aa)";
 
           layout = "dwindle";
-	  resize_on_border = true;
+          resize_on_border = true;
+          #extend_border_grab_area = 15;
+          #hover_icon_on_border = true;
+          #resize_corner = 0;
+          
 
           # Please see https://wiki.hyprland.org/Configuring/Tearing/ before you turn this on
           #allow_tearing = true;
@@ -70,10 +71,10 @@
           #    passes = 1;
           #};
 
-          drop_shadow = true;
-          shadow_range = 4;
-          shadow_render_power = 3;
-          "col.shadow" = "rgba(1a1a1aee)";
+          # drop_shadow = true;
+          # shadow_range = 4;
+          # shadow_render_power = 3;
+          # "col.shadow" = "rgba(1a1a1aee)";
       };
 
       animations = {
@@ -81,16 +82,16 @@
 
           # Some default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more
 
-          bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
-
-          animation = [
-          "windows, 1, 3, myBezier"
-          "windowsOut, 1, 3, default, popin 80%"
-          "border, 1, 5, default"
-          "borderangle, 1, 4, default"
-          "fade, 1, 3, default" 
-          "workspaces, 1, 3, default"
-          ];
+          # bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
+          #
+          # animation = [
+          # "windows, 1, 3, myBezier"
+          # "windowsOut, 1, 3, default, popin 80%"
+          # "border, 1, 5, default"
+          # "borderangle, 1, 4, default"
+          # "fade, 1, 3, default" 
+          # "workspaces, 1, 3, default"
+          # ];
       };
 
       dwindle = {
@@ -140,7 +141,7 @@
           "$mainMod, O, exec, rofi -show drun -show-icons"
           "$mainMod CTRL, S, exec, grimblast --freeze copy area"
           "$mainMod CTRL, D, exec, cosmic-files"
-          "$mainMod CTRL, F, exec, firefox"
+          "$mainMod CTRL, F, exec, librewolf"
 
           # move focus with mainMod + vim
           "$mainMod, H, movefocus, l"

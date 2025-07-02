@@ -10,8 +10,10 @@
       ../../modules/nixos/laptop-nvidia.nix
       ../../modules/nixos/uniwifi.nix
       #../../modules/nixos/kvm.nix
-      ../../modules/nixos/hyprland.nix
+            #../../modules/nixos/hyprland.nix
+      # ../../modules/nixos/stylix.nix
     ];
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Bootloader.
@@ -42,8 +44,12 @@
   };
 
   services.desktopManager.cosmic.enable = true;
-  services.displayManager.cosmic-greeter.enable = true;
+  # services.displayManager.cosmic-greeter.enable = true;
   programs.xwayland.enable = true;
+
+  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb.layout = "us, ara";
@@ -62,6 +68,7 @@
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = false;
+	# settings.General.ControllerMode = "bredr";
   };
 
   hardware.graphics = {
@@ -128,6 +135,11 @@
      libGL
      android-studio
 
+	 norminette
+	 gnumake
+
+	 pcsx2
+
      gimp
      nodejs
      cloudflared
@@ -135,7 +147,7 @@
      wl-clipboard
      vscode.fhs
      gcc
-     (python3.withPackages(ps: with ps; [ pip numpy pydub ]))
+     (python3.withPackages(ps: with ps; [ pip numpy pydub notebook ]))
      pipenv
      yt-dlp
      vesktop
@@ -166,12 +178,14 @@
      lutris
      heroic
      prismlauncher
+
+    xdg-desktop-portal-cosmic
   ];
 
   fonts.packages = with pkgs; [
     roboto
 	roboto-mono
-  ];
+  ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
   system.stateVersion = "24.05";
 
 }
