@@ -50,13 +50,13 @@
     LC_TIME = "en_GB.UTF-8";
   };
 
-  services.desktopManager.cosmic.enable = true;
-  services.displayManager.cosmic-greeter.enable = true;
+  # services.desktopManager.cosmic.enable = true;
+  # services.displayManager.cosmic-greeter.enable = true;
   programs.xwayland.enable = true;
 
-  # services.displayManager.sddm.enable = true;
-  # services.displayManager.sddm.wayland.enable = true;
-  # services.desktopManager.plasma6.enable = true;
+  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
+  services.desktopManager.plasma6.enable = true;
   # services.xserver.enable = true;
 
   # Configure keymap in X11
@@ -86,7 +86,7 @@
 
   powerManagement.enable = true;
 
-  services.thermald.enable = true;
+  # services.thermald.enable = true;
 
   #services.tlp.enable = true;
 
@@ -106,8 +106,6 @@
 
   hardware.opentabletdriver.enable = true;
   
-  programs.adb.enable = true;
-
   programs.steam.enable = true;
   programs.gamescope.enable = true;
   programs.gamemode.enable = true;
@@ -140,21 +138,16 @@
 
   # virtualisation.waydroid.enable = true;
   # virtualisation.docker.enable = true;
-  virtualisation.virtualbox.host.enable = true;
+  # virtualisation.virtualbox.host.enable = true;
   users.extraGroups.vboxusers.members = [ "ben" ];
 
   environment.systemPackages = with pkgs; [
-     scenebuilder
      libGL
      android-studio
      android-tools
 
-	 norminette
-	 gnumake
-	 clang
-	 valgrind
-
-	 pcsx2
+	 htop
+	 mission-center
 
      gimp
      nodejs
@@ -166,7 +159,9 @@
      (python3.withPackages(ps: with ps; [ pip numpy pydub notebook ]))
      pipenv
      yt-dlp
-     vesktop
+	 legcord
+	 element-desktop
+	 teamspeak6-client
      qbittorrent
      mpv
      neofetch
@@ -174,14 +169,8 @@
      libreoffice
      thunderbird
 	 librewolf
-     ungoogled-chromium
      google-chrome
-	 miraclecast
-        gnome-network-displays
 
-     anytype
-
-     yt-dlp
      kdePackages.kdenlive
      obs-studio
      ffmpeg
@@ -194,8 +183,6 @@
      lutris
      heroic
      prismlauncher
-
-    xdg-desktop-portal-cosmic
   ];
 
   fonts.packages = with pkgs; [

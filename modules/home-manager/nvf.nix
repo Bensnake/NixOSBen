@@ -27,6 +27,10 @@ in
 							vim.g.mail42 = "maboualy@student.42.fr"
 				'';
 			};
+			smear-cursor-nvim = {
+				package = pkgs.vimPlugins.smear-cursor-nvim;
+				setup = "require('smear_cursor').setup {}";
+			};
 		};
         viAlias = true;
         vimAlias = true;

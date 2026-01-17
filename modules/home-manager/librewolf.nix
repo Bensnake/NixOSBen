@@ -49,10 +49,6 @@
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/ctrl-number-to-switch-tabs/latest.xpi";
             installation_mode = "force_installed";
           };
-          "{a7399979-5203-4489-9861-b168187b52e1}" = {
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/purpleadblock/latest.xpi";
-            installation_mode = "force_installed";
-          };
         };
       };
     };
