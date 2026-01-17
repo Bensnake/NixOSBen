@@ -32,6 +32,10 @@
             installation_mode = "force_installed";
 			default_area = "navbar";
           };
+          "jid1-BoFifL9Vbdl2zQ@jetpack" = {
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/decentraleyes/latest.xpi";
+            installation_mode = "force_installed";
+          };
           "plasma-browser-integration@kde.org" = {
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/plasma-integration/latest.xpi";
             installation_mode = "force_installed";

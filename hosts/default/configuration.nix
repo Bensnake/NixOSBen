@@ -9,9 +9,11 @@
       ../../modules/nixos/nvidia.nix
       ../../modules/nixos/laptop-nvidia.nix
       ../../modules/nixos/uniwifi.nix
+      # ../../modules/nixos/tuxedo.nix
       #../../modules/nixos/kvm.nix
             #../../modules/nixos/hyprland.nix
       # ../../modules/nixos/stylix.nix
+      # ../../modules/nixos/sunshine.nix
     ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -19,6 +21,11 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  # silent boot
+  # boot.initrd.verbose = false;
+  # boot.consoleLogLevel = 0;
+  # boot.kernelParams = [ "quiet" "udev.log_level=3" ];
 
   networking.hostName = "nixos";
 
@@ -44,12 +51,13 @@
   };
 
   services.desktopManager.cosmic.enable = true;
-  # services.displayManager.cosmic-greeter.enable = true;
+  services.displayManager.cosmic-greeter.enable = true;
   programs.xwayland.enable = true;
 
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  # services.displayManager.sddm.enable = true;
+  # services.displayManager.sddm.wayland.enable = true;
+  # services.desktopManager.plasma6.enable = true;
+  # services.xserver.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb.layout = "us, ara";
@@ -68,7 +76,7 @@
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = false;
-	# settings.General.ControllerMode = "bredr";
+	input.General.ClassicBondedOnly = false;
   };
 
   hardware.graphics = {
@@ -101,6 +109,8 @@
   programs.adb.enable = true;
 
   programs.steam.enable = true;
+  programs.gamescope.enable = true;
+  programs.gamemode.enable = true;
 
   home-manager.backupFileExtension = "bak2";
   home-manager = {
@@ -128,15 +138,21 @@
 
 #  nixpkgs.config.android_sdk.accept_license = true;
 
-  virtualisation.waydroid.enable = true;
+  # virtualisation.waydroid.enable = true;
+  # virtualisation.docker.enable = true;
+  virtualisation.virtualbox.host.enable = true;
+  users.extraGroups.vboxusers.members = [ "ben" ];
 
   environment.systemPackages = with pkgs; [
      scenebuilder
      libGL
      android-studio
+     android-tools
 
 	 norminette
 	 gnumake
+	 clang
+	 valgrind
 
 	 pcsx2
 
