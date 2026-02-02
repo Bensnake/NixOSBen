@@ -171,7 +171,7 @@
 	 librewolf
      google-chrome
 
-     kdePackages.kdenlive
+     # kdePackages.kdenlive
      obs-studio
      ffmpeg
      libgcc
